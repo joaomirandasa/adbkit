@@ -747,6 +747,22 @@ For convenience purposes, if the screencap command fails (e.g. because it doesn'
 * Returns: `Promise`
 * Resolves with: `screencap` (see callback)
 
+##### Example to save an image
+
+```js
+var Promise = require('bluebird')
+var adb = require('adbkit')
+var client = adb.createClient()
+var fs = require('fs')
+
+  client.screencap(device.id).then(function(stream) {
+      stream.pipe(fs.createWriteStream("./screencapture.png"));
+  });
+
+```
+
+
+
 #### client.shell(serial, command[, callback])
 
 Runs a shell command on the device. Note that you'll be limited to the permissions of the `shell` user, which ADB uses.
